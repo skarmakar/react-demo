@@ -16,12 +16,12 @@ function App() {
   // multuple setState calls can be used to manage multiple states
 
   // this is a function
-  const switchNameHandler = () => {
+  const switchNameHandler = (newName) => {
     setPersonState({
       persons: [
-        {name: 'Hakuna', age: 20},
-        {name: 'Matata', age: 20},
-        {name: 'Haloom', age: 20}
+        {name: newName, age: 20},
+        {name: newName, age: 20},
+        {name: newName, age: 20}
       ]
     })
   }
@@ -29,8 +29,12 @@ function App() {
   return (
     <div className="react-demo-app">
       I am learning react!<br/>
-      <button onClick={switchNameHandler}>Click Me</button><br/>
-      <Person name={personsState.persons[0].name} age={personsState.persons[0].age}/>
+      <button onClick={() => switchNameHandler('ButtonClick')}>Click Me</button><br/>
+      <Person 
+        name={personsState.persons[0].name} 
+        age={personsState.persons[0].age}
+        click={switchNameHandler.bind(this, 'PClick')} // better code for binding functions
+      />
       <Person name={personsState.persons[1].name} age={personsState.persons[1].age}/>
       <Person name={personsState.persons[2].name} age={personsState.persons[2].age}/>
     </div>

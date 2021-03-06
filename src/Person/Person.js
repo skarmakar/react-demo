@@ -4,7 +4,7 @@ import React from 'react'
 // have as many components like this
 const person = (props) => {
   return (
-      <p>
+      <p onClick={props.click}>
         I am {props.name} with {props.age} years old. {props.children}
       </p>
   )
