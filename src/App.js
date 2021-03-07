@@ -7,36 +7,52 @@ import Person from './Person/Person'
 function App() {
   const [personsState, setPersonState] = useState({
     persons: [
-      {name: 'Max', age: 20},
-      {name: 'Manu', age: 20},
-      {name: 'Hanu', age: 20}
-    ]
+      {id: 'asdasd', name: 'Max', age: 20},
+      {id: 'dfdffd', name: 'Manu', age: 20},
+      {id: 'cxvxvx', name: 'Hanu', age: 20}
+    ],
+  });
+
+  const [personVisible, setPersonVisible] = useState({
+    showPersons: false
   });
 
   // multuple setState calls can be used to manage multiple states
 
   // this is a function
-  const switchNameHandler = (newName) => {
-    setPersonState({
-      persons: [
-        {name: newName, age: 20},
-        {name: newName, age: 20},
-        {name: newName, age: 20}
-      ]
-    })
+  const deletePersonHandler = (personIndex) => {
+    let persons = [...personsState.persons]; // this is creating a copy and does not modify the original method using a spread
+    persons.splice(personIndex, 1);
+    setPersonState({ persons: persons });
+  }
+
+  const togglePersonsHandler = () => {
+    const doesShow = personVisible.showPersons;
+    setPersonVisible({ showPersons: !doesShow });
+  }
+
+  let persons = null;
+  if(personVisible.showPersons) {
+    persons = (
+      <div>
+        { 
+          personsState.persons.map((person, index) => {
+            return <Person 
+              key={person.id}
+              name={person.name} 
+              age={person.age} 
+              click={() => deletePersonHandler(index)} />
+          })
+        }
+      </div>
+    )
   }
 
   return (
     <div className="react-demo-app">
-      I am learning react!<br/>
-      <button onClick={() => switchNameHandler('ButtonClick')}>Click Me</button><br/>
-      <Person 
-        name={personsState.persons[0].name} 
-        age={personsState.persons[0].age}
-        click={switchNameHandler.bind(this, 'PClick')} // better code for binding functions
-      />
-      <Person name={personsState.persons[1].name} age={personsState.persons[1].age}/>
-      <Person name={personsState.persons[2].name} age={personsState.persons[2].age}/>
+      <h2>I am learning react!</h2>
+      <button onClick={togglePersonsHandler}>TogglePersons</button><br/>
+      { persons }
     </div>
   );
 }

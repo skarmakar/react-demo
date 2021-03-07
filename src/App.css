@@ -1,4 +1,11 @@
 .react-demo-app {
-  color: red;
-  text-align: center;
+  margin: 10px;
+  padding: 10px;
+}
+
+.react-demo-app p {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  width: 60%;
 }
