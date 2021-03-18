@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import Layout from './components/Layout/Layout'
 
+import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder'
+
 // this is a stateful component
 function App() {
   return (
     <Layout>
-      <p>Check children</p>
+      <BurgerBuilder />
     </Layout>
   );
 }
